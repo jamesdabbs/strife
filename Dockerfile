@@ -1,4 +1,4 @@
-FROM ruby:2.2.0
+FROM ruby:2.2.2
 MAINTAINER James Dabbs <jamesdabbs@gmail.com>
 
 RUN apt-get update -qq && apt-get install -qqy build-essential libpq-dev node

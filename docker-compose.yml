@@ -4,11 +4,20 @@ db:
     - "5432"
 
 web:
-  extends:
-    file: docker/common.yml
-    service: web
   build: .
   env_file: .env
+  command: bundle exec rails s -p 3000 -b "0.0.0.0"
+  ports:
+    - "3000:3000"
+  volumes:
+    - .:/strife
+  links:
+    - db
+
+slackbot:
+  build: .
+  env_file: .env
+  command: bundle exec rails runner bin/slackbot.rb
   volumes:
     - .:/strife
   links:

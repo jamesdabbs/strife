@@ -19,10 +19,10 @@ class Dock < Thor
     run "docker push #{DOCKER_USER}/#{PROJECT}_web"
 
     env PROD
-    run "docker-compose -f docker/prod.yml stop web"
+    run "docker-compose -f docker/prod.yml stop web slackbot"
     run "docker-compose -f docker/prod.yml pull"
-    run "docker-compose -f docker/prod.yml rm -f web"
-    run "docker-compose -f docker/prod.yml scale web=1"
+    run "docker-compose -f docker/prod.yml rm -f web slackbot"
+    run "docker-compose -f docker/prod.yml scale web=1 slackbot=1"
   end
 
 private

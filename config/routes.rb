@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'application#home'
+  post '/echo' => 'echo#respond'
+
+  root to: 'echo#status'
 end
