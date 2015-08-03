@@ -5,11 +5,9 @@ db:
 
 web:
   extends:
-    file: docker/common.yml
+    file: ./common.yml
     service: web
-  build: .
-  env_file: .env
-  volumes:
-    - .:/strife
+  image: jdabbs/strife_web
+  env_file: ./prod.env
   links:
     - db

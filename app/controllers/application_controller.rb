@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def home
-    render json: { status: "ok" }
+    render json: {
+      mode:   ENV['MODE'],
+      env:    ENV.to_h
+    }
   end
 end

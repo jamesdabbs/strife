@@ -1,7 +1,17 @@
 FROM ruby:2.2.0
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
-RUN mkdir /myapp
-WORKDIR /myapp
-ADD Gemfile /myapp/Gemfile
-RUN bundle install
-ADD . /myapp
+MAINTAINER James Dabbs <jamesdabbs@gmail.com>
+
+RUN apt-get update -qq && apt-get install -qqy build-essential libpq-dev node
+
+WORKDIR /tmp
+ADD ./Gemfile /tmp/Gemfile
+ADD ./Gemfile.lock /tmp/Gemfile.lock
+RUN bundle install --quiet
+
+EXPOSE 3000
+
+ENV APP_HOME /strife
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+ADD . $APP_HOME
